@@ -6,15 +6,10 @@ namespace HRIS.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EmployeeController : ControllerBase
+public class EmployeesController(IEmployeeService employeeService) : ControllerBase
 {
-    private static IEmployeeService? _employeeService;
+    private readonly IEmployeeService? _employeeService = employeeService;
 
-    public EmployeeController(IEmployeeService employeeService)
-    {
-        _employeeService = employeeService;
-    }
-    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeeResponse>>> GetAll(
         [FromQuery]string? name,
@@ -28,7 +23,7 @@ public class EmployeeController : ControllerBase
                 .ToList();
         }
         
-        return Ok(employees);
+        return Ok(employees.Select(e => e.ToResponse()));
     }
     
     [HttpGet("{id:guid}")]
@@ -42,7 +37,7 @@ public class EmployeeController : ControllerBase
             return NotFound();
         }
         
-        return Ok(employee);
+        return Ok(employee.ToResponse());
     }
     
     [HttpPost]

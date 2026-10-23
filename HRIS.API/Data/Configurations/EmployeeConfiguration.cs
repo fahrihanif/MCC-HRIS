@@ -21,7 +21,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.Property(e => e.EmployeeStatus)
             .HasConversion<string>()
             .HasMaxLength(20)
-            .HasDefaultValue(EmployeeStatus.Active)
+            // .HasDefaultValue(EmployeeStatus.Active)
             .IsRequired();
         
         builder.HasIndex(e => e.EmployeeNumber)
@@ -38,7 +38,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasForeignKey(e => e.PositionId)
             .OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(e => e.Manager)
-            .WithMany(m => m.DirectRepots)
+            .WithMany(m => m.DirectReports)
             .HasForeignKey(e => e.ManagerId)
             .OnDelete(DeleteBehavior.Restrict);
     }
