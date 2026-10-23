@@ -8,6 +8,7 @@ public class EmployeeRepository(HrisDbContext context) : Repository<Employee>(co
 {
     public async Task<IReadOnlyCollection<EmployeeResponse>> GetResponsesAsync(CancellationToken ct = default)
         => await Context.Employees
+            .AsNoTracking()
             .OrderBy(e => e.FullName)
             .Select(e => e.ToResponse(
                 e.Department.Name,
@@ -17,6 +18,7 @@ public class EmployeeRepository(HrisDbContext context) : Repository<Employee>(co
 
     public async Task<EmployeeResponse?> GetResponseAsync(Guid id, CancellationToken ct = default)
         => await Context.Employees
+            .AsNoTracking()
             .Where(e => e.Id == id)
             .Select(e => e.ToResponse(
                 e.Department.Name,

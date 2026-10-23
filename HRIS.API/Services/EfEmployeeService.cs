@@ -32,7 +32,7 @@ public class EfEmployeeService(IUnitOfWork uow, TimeProvider timeProvider) : IEm
         if (employee is null)
             return false;
         
-        employee.ToEntity(request);
+        employee.ApplyUpdateEntity(request);
         await uow.SaveChangesAsync(ct);
         return true;
     }

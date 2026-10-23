@@ -36,7 +36,7 @@ public static class EmployeeMappings
             request.PositionId,
             request.ManagerId);
 
-    public static void ToEntity(this Employee employee, UpdateEmployeeRequest request)
+    public static void ApplyUpdateEntity(this Employee employee, UpdateEmployeeRequest request)
     {
         employee.FullName = request.FullName;
         employee.DepartmentId = request.DepartmentId;
