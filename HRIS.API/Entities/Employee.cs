@@ -8,6 +8,23 @@ public enum EmployeeStatus
 
 public class Employee
 {
+    public Employee(Guid id, string employeeNumber, string fullName, string email, DateOnly hireDate, DateTimeOffset createdAt, EmployeeStatus employeeStatus, DateOnly? terminatedAt, Guid departmentId, Guid positionId, Guid? managerId)
+    {
+        Id = id;
+        EmployeeNumber = employeeNumber;
+        FullName = fullName;
+        Email = email;
+        HireDate = hireDate;
+        CreatedAt = createdAt;
+        EmployeeStatus = employeeStatus;
+        TerminatedAt = terminatedAt;
+        DepartmentId = departmentId;
+        PositionId = positionId;
+        ManagerId = managerId;
+    }
+
+    public Employee() { }
+    
     public Guid Id { get; set; }
     public string EmployeeNumber { get; set; } = null!;
     public string FullName { get; set; } = null!;
