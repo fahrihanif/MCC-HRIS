@@ -14,7 +14,7 @@ public static class EmployeeMappings
             employee.FullName, 
             employee.Email, 
             employee.HireDate, 
-            employee.EmployeeStatus, 
+            employee.Status, 
             departmentName, 
             positionTitle, 
             managerFullName, 
@@ -36,22 +36,11 @@ public static class EmployeeMappings
             request.PositionId,
             request.ManagerId);
 
-    public static Employee ToEntity(
-        this Employee employee, 
-        UpdateEmployeeRequest request)
+    public static void ToEntity(this Employee employee, UpdateEmployeeRequest request)
     {
-        return new(
-            employee.Id,
-            employee.EmployeeNumber,
-            request.FullName,
-            employee.Email,
-            employee.HireDate,
-            employee.CreatedAt,
-            employee.EmployeeStatus,
-            employee.TerminatedAt,
-            request.DepartmentId,
-            request.PositionId,
-            request.ManagerId
-            );
+        employee.FullName = request.FullName;
+        employee.DepartmentId = request.DepartmentId;
+        employee.PositionId = request.PositionId;
+        employee.ManagerId = request.ManagerId;
     }
 }

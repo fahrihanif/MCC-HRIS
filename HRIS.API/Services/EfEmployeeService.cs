@@ -9,7 +9,7 @@ namespace HRIS.API.Services;
 public class EfEmployeeService(IUnitOfWork uow, TimeProvider timeProvider) : IEmployeeService
 {
     public async Task<IReadOnlyCollection<EmployeeResponse>> GetAllAsync(CancellationToken ct = default)
-        => await uow.Employees.GetResponseAsync(ct);
+        => await uow.Employees.GetResponsesAsync(ct);
 
     public Task<EmployeeResponse?> GetByIdAsync(Guid id, CancellationToken ct = default)
         => uow.Employees.GetResponseAsync(id, ct);
@@ -43,7 +43,7 @@ public class EfEmployeeService(IUnitOfWork uow, TimeProvider timeProvider) : IEm
         if (employee is null)
             return false;
         
-        uow.Employees.Delete(employee);
+        uow.Employees.Remove(employee);
         await uow.SaveChangesAsync(ct);
         return true;
     }
@@ -53,10 +53,10 @@ public class EfEmployeeService(IUnitOfWork uow, TimeProvider timeProvider) : IEm
         var employee = await uow.Employees.GetByIdAsync(id, ct);
         if (employee is null) 
             return TerminateResult.NotFound;
-        if (employee.EmployeeStatus is EmployeeStatus.Terminated) 
+        if (employee.Status is EmployeeStatus.Terminated) 
             return TerminateResult.AlreadyTerminated;
         
-        employee.EmployeeStatus = EmployeeStatus.Terminated;
+        employee.Status = EmployeeStatus.Terminated;
         employee.TerminatedAt = DateOnly.FromDateTime(timeProvider.GetUtcNow().UtcDateTime);
         
         var directReports = await uow.Employees.GetDirectReportsAsync(id, ct);

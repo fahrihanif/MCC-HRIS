@@ -23,6 +23,6 @@ public class Repository<TEntity>(HrisDbContext context) : IRepository<TEntity> w
     public void Update(TEntity entity)
         => Set.Update(entity); 
 
-    public void Delete(TEntity entity)
+    public void Remove(TEntity entity)
         => Set.Remove(entity);
 }
