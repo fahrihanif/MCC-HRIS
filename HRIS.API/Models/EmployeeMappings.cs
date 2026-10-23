@@ -1,4 +1,6 @@
-namespace HRIS.API.Entities;
+using HRIS.API.Entities;
+
+namespace HRIS.API.Models;
 
 public static class EmployeeMappings
 {

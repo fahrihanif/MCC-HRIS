@@ -1,4 +1,5 @@
 using HRIS.API.Entities;
+using HRIS.API.Models;
 using HRIS.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
