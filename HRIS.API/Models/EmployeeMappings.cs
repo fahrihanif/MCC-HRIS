@@ -38,7 +38,10 @@ public static class EmployeeMappings
 
     public static void ApplyUpdateEntity(this Employee employee, UpdateEmployeeRequest request)
     {
+        employee.EmployeeNumber = request.EmployeeNumber;
         employee.FullName = request.FullName;
+        employee.Email = request.Email;
+        employee.HireDate = request.HireDate;
         employee.DepartmentId = request.DepartmentId;
         employee.PositionId = request.PositionId;
         employee.ManagerId = request.ManagerId;
